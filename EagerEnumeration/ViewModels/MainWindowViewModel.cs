@@ -16,20 +16,25 @@ namespace EagerEnumeration.ViewModels
 
         private static VirtualList<ExpensiveObject> MakeVirtualList(int nItems)
         {
-            return new VirtualList<ExpensiveObject>(nItems, ExpensiveObject.Create);
+            return new VirtualList<ExpensiveObject>(nItems, CreateExpensiveObject);
         }
 
         private static WrappedList<ExpensiveObject> MakeWrappedList(int nItems)
         {
             return new WrappedList<ExpensiveObject>(Enumerable.Range(0, nItems)
-                .Select(n => ExpensiveObject.Create(n)));
+                .Select(n => new ExpensiveObject(n)));
         }
 
 
         private static List<ExpensiveObject> MakeList(int nItems)
         {
             return new List<ExpensiveObject>(Enumerable.Range(0, nItems)
-                .Select(n => ExpensiveObject.Create(n)));
+                .Select(n => new ExpensiveObject(n)));
+        }
+
+        private static ExpensiveObject CreateExpensiveObject(int n)
+        {
+            return new ExpensiveObject(n);
         }
     }
 }
